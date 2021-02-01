@@ -41,9 +41,13 @@ public class WorkShopSecurityConfiguration extends WebSecurityConfigurerAdapter 
 		    .antMatchers("/h2-*").hasRole("ADMIN")
 		    .antMatchers(HttpMethod.GET, "/api/registrations").hasRole("ADMIN")
 		    .antMatchers(HttpMethod.GET, "/css/*", "/js/*", "/images/*", "/webfonts/*", "/view/*").permitAll()
-		    .anyRequest().permitAll()
+		    .antMatchers("/admin/*").hasRole("ADMIN")
 		.and()
-		.httpBasic();
+		.formLogin()
+		.loginPage("/login").permitAll()
+	      .usernameParameter("username") // same as default.
+	      .passwordParameter("password") // same as default.
+	      .defaultSuccessUrl("/admin/main", true);
 	}
 
 	@Override

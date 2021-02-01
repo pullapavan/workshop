@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Registrations {
 
 	@Id
@@ -38,7 +40,7 @@ public class Registrations {
 	@Column(name = "student_email", length = 50, nullable = false, unique = true)
 	private String email;
 
-	@Column(name = "student_gender", nullable = false, unique = false)
+	@Column(name = "student_gender", nullable = true, unique = false)
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
