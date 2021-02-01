@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * 
@@ -39,8 +38,9 @@ public class WorkShopSecurityConfiguration extends WebSecurityConfigurerAdapter 
 		     .disable()
 		
 		.authorizeRequests()
-		    .antMatchers("/h2-*", "/").permitAll()
+		    .antMatchers("/h2-*").hasRole("ADMIN")
 		    .antMatchers(HttpMethod.GET, "/api/registrations").hasRole("ADMIN")
+		    .antMatchers(HttpMethod.GET, "/css/*", "/js/*", "/images/*", "/webfonts/*", "/view/*").permitAll()
 		    .anyRequest().permitAll()
 		.and()
 		.httpBasic();
