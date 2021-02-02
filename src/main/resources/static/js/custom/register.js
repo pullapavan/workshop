@@ -7,9 +7,10 @@ var register = function() {
 	var email = $("#email").val();
 	var college = $("#college").val();
 	var stream = $("#stream").val();
+	var mobile = $("#mobile").val();
 
 	if (!name || !email) {
-		failed("PLease enter name and email");
+		failed("PLease enter name , email and mobile...");
 		return;
 	}
 
@@ -30,7 +31,8 @@ var register = function() {
 			"studentName" : name,
 			"email" : email,
 			"college" : college,
-			"stream" : stream
+			"stream" : stream,
+			"mobile" : mobile
 		}),
 		success : function(data, status, xhr) {
 			success();
